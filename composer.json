@@ -1,0 +1,32 @@
+{
+  "name": "pmatseykanets/artisan-io",
+  "description": "Artisan commands to manage your beanstalkd",
+  "keywords": ["laravel", "artisan", "beanstalkd", "queue", "job"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Peter Matseykanets"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "illuminate/support": "~5.1",
+    "illuminate/console": "~5.1",
+    "pda/pheanstalk": "~3.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "mockery/mockery": "~0.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pvm\\ArtisanBeans\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Pvm\\ArtisanBeans\\": "tests/"
+    }
+  },
+  "minimum-stability": "dev"
+}
