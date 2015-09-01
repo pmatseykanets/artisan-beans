@@ -76,10 +76,10 @@ class TubeStatsCommand extends BaseCommand
     /**
      * @param $tube
      *
-     * @return object|\Pheanstalk\Response
-     *
      * @throws ServerException
      * @throws \Exception
+     *
+     * @return object|\Pheanstalk\Response
      */
     protected function getTubeStats($tube)
     {
