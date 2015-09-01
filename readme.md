@@ -1,6 +1,7 @@
 # artisan-beans
 
 [![Laravel 5.1](https://img.shields.io/badge/Laravel-5.1-orange.svg)](http://laravel.com)
+[![StyleCI](https://styleci.io/repos/41767069/shield)](https://styleci.io/repos/41767069)
 [![Latest Stable Version](https://poser.pugx.org/pmatseykanets/artisan-beans/v/stable)](https://packagist.org/packages/pmatseykanets/artisan-beans)
 [![License](https://poser.pugx.org/pmatseykanets/artisan-beans/license)](https://packagist.org/packages/pmatseykanets/artisan-beans)
 
