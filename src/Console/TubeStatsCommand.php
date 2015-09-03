@@ -2,7 +2,6 @@
 
 namespace Pvm\ArtisanBeans\Console;
 
-use Illuminate\Support\Str;
 use Pheanstalk\Exception\ServerException;
 
 class TubeStatsCommand extends BaseCommand
@@ -61,6 +60,7 @@ class TubeStatsCommand extends BaseCommand
 
     /**
      * @param $stats
+     *
      * @return array
      */
     protected function transformTubeStatsForTable($stats)

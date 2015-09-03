@@ -42,10 +42,11 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Peek a job in a spesific state
+     * Peek a job in a spesific state.
      *
      * @param $tube
      * @param $state
+     *
      * @throws ServerException
      * @throws \Exception
      */
@@ -65,10 +66,12 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Reserve a job from the tube
+     * Reserve a job from the tube.
      *
      * @param $tube
+     *
      * @return bool|object|\Pheanstalk\Job|void
+     *
      * @throws ServerException
      * @throws \Exception
      */
@@ -86,7 +89,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Returns the job's statistics
+     * Returns the job's statistics.
      *
      * @param $job
      *
@@ -109,7 +112,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Delete the job
+     * Delete the job.
      *
      * @param $job
      */
@@ -119,7 +122,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Bury the job
+     * Bury the job.
      *
      * @param $job
      * @param int $priority New priority
@@ -134,7 +137,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Kick the job
+     * Kick the job.
      *
      * @param $tube
      * @param int $count
@@ -149,7 +152,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Puts a job in the queue
+     * Puts a job in the queue.
      *
      * @param string $tube
      * @param string $body
@@ -168,7 +171,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Returns a Pheanstalk instance
+     * Returns a Pheanstalk instance.
      *
      * @return Pheanstalk
      */
@@ -182,7 +185,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Generic logic for reading ang validating command's arguments and options
+     * Generic logic for reading ang validating command's arguments and options.
      */
     protected function parseArguments()
     {
@@ -200,7 +203,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Command specific logic for reading ang validating arguments and options
+     * Command specific logic for reading ang validating arguments and options.
      */
     protected function parseCommandArguments()
     {
@@ -208,7 +211,7 @@ abstract class BaseCommand extends Command
 
     /**
      * Tries to figure out and set host, port and default tube
-     * from the Laravel's queue.php config
+     * from the Laravel's queue.php config.
      *
      * @param $connectionName
      */
@@ -257,7 +260,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Build a command's signature
+     * Build a command's signature.
      *
      * @return string
      */
@@ -271,7 +274,7 @@ abstract class BaseCommand extends Command
 
     /**
      * Transforms an assoc array into a multidementional one
-     * which is expected by helper table() method
+     * which is expected by helper table() method.
      *
      * @param $data
      *
@@ -312,7 +315,7 @@ abstract class BaseCommand extends Command
     /**
      * If a job or other object doesn't exist beanstalkd returns NOT_FOUND response
      * We use is to determine whether we need to display a normal message
-     * or re-throw an exception
+     * or re-throw an exception.
      *
      * @param \Exception $e
      *
@@ -324,7 +327,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Displays job information
+     * Displays job information.
      *
      * @param $job
      */
@@ -347,7 +350,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Displays message
+     * Displays message.
      *
      * @param $tube
      * @param $state
@@ -360,7 +363,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Returns the maximum allowed size for a job body
+     * Returns the maximum allowed size for a job body.
      *
      * @return int
      */
@@ -372,8 +375,9 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * @param null $message
+     * @param null   $message
      * @param string $question
+     *
      * @return bool
      */
     protected function confirmToProceed($message = null, $question = 'Are you sure you want to proceed?')
@@ -386,7 +390,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Returns statistics for the tube
+     * Returns statistics for the tube.
      *
      * @param $tube
      *
@@ -411,17 +415,17 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Lists all currently available tubes
+     * Lists all currently available tubes.
      *
      * @return array
      */
     protected function getTubes()
     {
-        return (array)$this->getPheanstalk()->listTubes();
+        return (array) $this->getPheanstalk()->listTubes();
     }
 
     /**
-     * Lists server statistics optionaly filtering keys by a pattern
+     * Lists server statistics optionaly filtering keys by a pattern.
      *
      * @param string $pattern
      *
@@ -429,7 +433,7 @@ abstract class BaseCommand extends Command
      */
     protected function getServerStats($pattern = '')
     {
-        $stats = (array)$this->getPheanstalk()->stats();
+        $stats = (array) $this->getPheanstalk()->stats();
 
         if (!empty($pattern)) {
             $stats = array_filter($stats, function ($key) use ($pattern) {

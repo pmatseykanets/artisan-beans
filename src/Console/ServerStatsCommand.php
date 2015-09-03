@@ -23,7 +23,7 @@ class ServerStatsCommand extends BaseCommand
     }
 
     /**
-     * Displays server statistics
+     * Displays server statistics.
      *
      * @param $key
      */
