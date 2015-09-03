@@ -21,4 +21,13 @@ class UnpauseTubeCommand extends PauseTubeCommand
     {
         return "Tube '$tube' has been unpaused.";
     }
+
+    /**
+     *{@inheritdoc}.
+     */
+    protected function parseCommandArguments()
+    {
+        // Override parent's parseCommandArguments
+        // since we use a predefined value for $this->delay
+    }
 }
