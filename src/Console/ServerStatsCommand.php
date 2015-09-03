@@ -6,14 +6,14 @@ class ServerStatsCommand extends BaseCommand
 {
     protected $commandName = 'server';
 
-    protected $commandArguments = '{key? : Key name}';
-
-    protected $commandOptions = '';
+    protected $commandArguments = '
+        {key? : Key name}
+    ';
 
     protected $description = 'Show server statistics';
 
     /**
-     *
+     * {@inheritdoc}
      */
     public function handle()
     {
@@ -23,30 +23,12 @@ class ServerStatsCommand extends BaseCommand
     }
 
     /**
+     * Displays server statistics
+     *
      * @param $key
      */
     protected function renderStats($key)
     {
-        $this->table(['Key', 'Value'], $this->transformForTable($this->getStats($key)));
-    }
-
-    /**
-     * @param string $pattern
-     *
-     * @return array
-     */
-    protected function getStats($pattern = '')
-    {
-        $stats = (array) $this->getPheanstalk()->stats();
-
-        if (!empty($pattern)) {
-            $stats = array_filter($stats, function ($key) use ($pattern) {
-                return 1 === preg_match("/$pattern/i", $key);
-            }, ARRAY_FILTER_USE_KEY);
-        }
-
-        ksort($stats);
-
-        return $stats;
+        $this->table(['Key', 'Value'], $this->transformForTable($this->getServerStats($key)));
     }
 }

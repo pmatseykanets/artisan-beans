@@ -13,14 +13,12 @@ class PauseTubeCommand extends BaseCommand
         {delay : Seconds before jobs can be reserved from the tube}
     ';
 
-    protected $commandOptions = '';
-
     protected $description = 'Pause the tube';
 
     protected $delay;
 
     /**
-     *
+     * {@inheritdoc}
      */
     public function handle()
     {
@@ -29,7 +27,7 @@ class PauseTubeCommand extends BaseCommand
         $tube = $this->argument('tube');
 
         try {
-            $this->getPheanstalk()->pauseTube($tube, $this->getDelay());
+            $this->getPheanstalk()->pauseTube($tube, $this->delay);
         } catch (ServerException $e) {
             if ($this->isNotFoundException($e)) {
                 return $this->comment("Tube '$tube' doesn't exist.");
@@ -58,16 +56,6 @@ class PauseTubeCommand extends BaseCommand
      */
     protected function getSuccessMessage($tube)
     {
-        $delay = $this->getDelay();
-
-        return "Tube '$tube' has been paused for $delay sec.";
-    }
-
-    /**
-     * @return int
-     */
-    protected function getDelay()
-    {
-        return $this->delay;
+        return "Tube '$tube' has been paused for $this->delay sec.";
     }
 }

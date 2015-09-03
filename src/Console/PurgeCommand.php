@@ -22,8 +22,7 @@ class PurgeCommand extends DeleteCommand
 
         $tube = $this->argument('tube') ?: $this->defaultTube;
 
-        $this->comment('You are about to delete '.($this->count ?: 'all')." '$this->state' jobs in '$tube' tube.");
-        if (!$this->confirm('Are you sure you want to proceed?')) {
+        if (!$this->confirmToProceed('You are about to delete '.($this->count ?: 'all')." '$this->state' jobs in '$tube' tube.")) {
             return;
         }
 

@@ -6,19 +6,12 @@ class DeleteCommand extends PeekCommand
 {
     protected $commandName = 'delete';
 
-    protected $commandArguments = '
-        {state=ready : State [ready|delayed|buried]}
-        {tube? : Tube name}
-    ';
-
-    protected $commandOptions = '';
-
     protected $description = 'Delete a job';
 
     protected $state = 'ready';
 
     /**
-     *
+     * {@inheritdoc}
      */
     public function handle()
     {

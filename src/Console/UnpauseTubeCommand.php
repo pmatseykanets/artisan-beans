@@ -12,12 +12,7 @@ class UnpauseTubeCommand extends PauseTubeCommand
 
     protected $description = 'Upause the tube';
 
-    /**
-     *{@inheritdoc}.
-     */
-    protected function parseCommandArguments()
-    {
-    }
+    protected $delay = 0;
 
     /**
      * {$@inheritdoc}.
@@ -25,13 +20,5 @@ class UnpauseTubeCommand extends PauseTubeCommand
     protected function getSuccessMessage($tube)
     {
         return "Tube '$tube' has been unpaused.";
-    }
-
-    /**
-     * {$@inheritdoc}.
-     */
-    protected function getDelay()
-    {
-        return 0;
     }
 }

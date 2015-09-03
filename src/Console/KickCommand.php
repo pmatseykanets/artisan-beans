@@ -15,6 +15,9 @@ class KickCommand extends BaseCommand
 
     protected $count = 1;
 
+    /**
+     * {@inheritdoc}
+     */
     public function handle()
     {
         $this->parseArguments();
@@ -22,8 +25,7 @@ class KickCommand extends BaseCommand
         $tube = $this->argument('tube') ?: $this->defaultTube;
 
         if ($this->count > 1) {
-            $this->comment("You are about to kick $this->count jobs in '$tube' tube.");
-            if (!$this->confirm('Are you sure you want to proceed?')) {
+            if (!$this->confirmToProceed("You are about to kick $this->count jobs in '$tube' tube.")) {
                 return;
             }
         }
@@ -42,8 +44,6 @@ class KickCommand extends BaseCommand
      */
     protected function parseCommandArguments()
     {
-        parent::parseCommandArguments();
-
         if ($this->argument('count')) {
             if (false === ($this->count = filter_var($this->argument('count'), FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]))) {
                 throw new \InvalidArgumentException('Count should be a positive integer.');

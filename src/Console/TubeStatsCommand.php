@@ -17,6 +17,13 @@ class TubeStatsCommand extends BaseCommand
 
     protected $description = 'Show tube statistics';
 
+    protected $tubeStatsHeaders = [
+        'Tube', 'Buried', 'Delayed', 'Ready', 'Reserved', 'Urgent', 'Waiting', 'Total',
+    ];
+
+    /**
+     * {@inheritdoc}
+     */
     public function handle()
     {
         $this->parseArguments();
@@ -34,30 +41,11 @@ class TubeStatsCommand extends BaseCommand
      */
     protected function renderAllStats()
     {
-        foreach ($this->getPheanstalk()->listTubes() as $tube) {
-            $stats = $this->getTubeStats($tube);
-            $data[] = [
-                $stats['name'],
-                $stats['current-jobs-buried'],
-                $stats['current-jobs-delayed'],
-                $stats['current-jobs-ready'],
-                $stats['current-jobs-reserved'],
-                $stats['current-jobs-urgent'],
-                $stats['current-waiting'],
-                $stats['total-jobs'],
-            ];
+        foreach ($this->getTubes() as $tube) {
+            $data[] = $this->transformTubeStatsForTable($this->getTubeStats($tube));
         }
 
-        $this->table([
-            'Tube',
-            'Buried',
-            'Delayed',
-            'Ready',
-            'Reserved',
-            'Urgent',
-            'Waiting',
-            'Total',
-        ], $data);
+        $this->table($this->tubeStatsHeaders, $data);
     }
 
     /**
@@ -68,31 +56,24 @@ class TubeStatsCommand extends BaseCommand
      */
     protected function renderTubeStats($tube)
     {
-        $stats = (array) $this->getTubeStats($tube);
-
-        $this->table(['Property', 'Value'], $this->transformForTable($stats));
+        $this->table(['Property', 'Value'], $this->transformForTable($this->getTubeStats($tube)));
     }
 
     /**
-     * @param $tube
-     *
-     * @throws ServerException
-     * @throws \Exception
-     *
-     * @return object|\Pheanstalk\Response
+     * @param $stats
+     * @return array
      */
-    protected function getTubeStats($tube)
+    protected function transformTubeStatsForTable($stats)
     {
-        try {
-            $stats = $this->getPheanstalk()->statsTube($tube);
-        } catch (ServerException $e) {
-            if (Str::contains($e->getMessage(), 'NOT_FOUND')) {
-                throw new \RuntimeException("Tube '$tube' doesn't exist.");
-            }
-
-            throw $e;
-        }
-
-        return $stats;
+        return [
+            $stats['name'].($stats['pause-time-left'] ? " (paused {$stats['pause-time-left']})" : ''),
+            $stats['current-jobs-buried'],
+            $stats['current-jobs-delayed'],
+            $stats['current-jobs-ready'],
+            $stats['current-jobs-reserved'],
+            $stats['current-jobs-urgent'],
+            $stats['current-waiting'],
+            $stats['total-jobs'],
+        ];
     }
 }

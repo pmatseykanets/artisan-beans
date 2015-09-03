@@ -18,7 +18,7 @@ class PeekCommand extends BaseCommand
     protected $state = 'ready';
 
     /**
-     *
+     * {@inheritdoc}
      */
     public function handle()
     {

@@ -90,7 +90,7 @@ class PutCommand extends BaseCommand
         $maxAllowed = $this->getMaxJobSize();
 
         if ($size > $maxAllowed) {
-            throw new \InvalidArgumentException("Body size $size is greater than max allowed.");
+            throw new \InvalidArgumentException("Body size $size is greater than max allowed $maxAllowed.");
         }
     }
 }

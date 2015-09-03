@@ -41,9 +41,17 @@ abstract class BaseCommand extends Command
         $this->defaultTube = Pheanstalk::DEFAULT_TUBE;
     }
 
+    /**
+     * Peek a job in a spesific state
+     *
+     * @param $tube
+     * @param $state
+     * @throws ServerException
+     * @throws \Exception
+     */
     protected function peekJob($tube, $state)
     {
-        $peekMethod = 'peek'.ucfirst($this->state);
+        $peekMethod = 'peek'.ucfirst($state);
 
         try {
             return $this->getPheanstalk()->$peekMethod($tube);
@@ -56,6 +64,14 @@ abstract class BaseCommand extends Command
         }
     }
 
+    /**
+     * Reserve a job from the tube
+     *
+     * @param $tube
+     * @return bool|object|\Pheanstalk\Job|void
+     * @throws ServerException
+     * @throws \Exception
+     */
     protected function reserveJob($tube)
     {
         try {
@@ -69,10 +85,20 @@ abstract class BaseCommand extends Command
         }
     }
 
+    /**
+     * Returns the job's statistics
+     *
+     * @param $job
+     *
+     * @return array
+     *
+     * @throws ServerException
+     * @throws \Exception
+     */
     protected function getJobStats($job)
     {
         try {
-            return $this->getPheanstalk()->statsJob($job);
+            return (array) $this->getPheanstalk()->statsJob($job);
         } catch (ServerException $e) {
             if ($this->isNotFoundException($e)) {
                 return;
@@ -83,6 +109,8 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * Delete the job
+     *
      * @param $job
      */
     protected function deleteJob($job)
@@ -91,6 +119,8 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * Bury the job
+     *
      * @param $job
      * @param int $priority New priority
      */
@@ -104,6 +134,8 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * Kick the job
+     *
      * @param $tube
      * @param int $count
      *
@@ -117,6 +149,8 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * Puts a job in the queue
+     *
      * @param string $tube
      * @param string $body
      * @param int    $priority
@@ -134,6 +168,8 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * Returns a Pheanstalk instance
+     *
      * @return Pheanstalk
      */
     public function getPheanstalk()
@@ -146,7 +182,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     *
+     * Generic logic for reading ang validating command's arguments and options
      */
     protected function parseArguments()
     {
@@ -163,11 +199,17 @@ abstract class BaseCommand extends Command
         $this->parseCommandArguments();
     }
 
+    /**
+     * Command specific logic for reading ang validating arguments and options
+     */
     protected function parseCommandArguments()
     {
     }
 
     /**
+     * Tries to figure out and set host, port and default tube
+     * from the Laravel's queue.php config
+     *
      * @param $connectionName
      */
     protected function parseConnection($connectionName)
@@ -215,7 +257,9 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * Build a command's signature
      *
+     * @return string
      */
     protected function buildCommandSignature()
     {
@@ -226,6 +270,9 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * Transforms an assoc array into a multidementional one
+     * which is expected by helper table() method
+     *
      * @param $data
      *
      * @return array
@@ -263,6 +310,10 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * If a job or other object doesn't exist beanstalkd returns NOT_FOUND response
+     * We use is to determine whether we need to display a normal message
+     * or re-throw an exception
+     *
      * @param \Exception $e
      *
      * @return bool
@@ -273,7 +324,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * Renders the job to the command output.
+     * Displays job information
      *
      * @param $job
      */
@@ -296,6 +347,8 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * Displays message
+     *
      * @param $tube
      * @param $state
      */
@@ -307,12 +360,85 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * Returns the maximum allowed size for a job body
+     *
      * @return int
      */
     protected function getMaxJobSize()
     {
-        $stats = $this->getPheanstalk()->stats();
+        $stats = $this->getServerStats('max-job-size');
 
         return isset($stats['max-job-size']) ? (int) $stats['max-job-size'] : 65535;
+    }
+
+    /**
+     * @param null $message
+     * @param string $question
+     * @return bool
+     */
+    protected function confirmToProceed($message = null, $question = 'Are you sure you want to proceed?')
+    {
+        if ($message) {
+            $this->comment($message);
+        }
+
+        return $this->confirm($question);
+    }
+
+    /**
+     * Returns statistics for the tube
+     *
+     * @param $tube
+     *
+     * @throws ServerException
+     * @throws \Exception
+     *
+     * @return object|\Pheanstalk\Response
+     */
+    protected function getTubeStats($tube)
+    {
+        try {
+            $stats = $this->getPheanstalk()->statsTube($tube);
+        } catch (ServerException $e) {
+            if ($this->isNotFoundException($e)) {
+                throw new \RuntimeException("Tube '$tube' doesn't exist.");
+            }
+
+            throw $e;
+        }
+
+        return $stats;
+    }
+
+    /**
+     * Lists all currently available tubes
+     *
+     * @return array
+     */
+    protected function getTubes()
+    {
+        return (array)$this->getPheanstalk()->listTubes();
+    }
+
+    /**
+     * Lists server statistics optionaly filtering keys by a pattern
+     *
+     * @param string $pattern
+     *
+     * @return array
+     */
+    protected function getServerStats($pattern = '')
+    {
+        $stats = (array)$this->getPheanstalk()->stats();
+
+        if (!empty($pattern)) {
+            $stats = array_filter($stats, function ($key) use ($pattern) {
+                return 1 === preg_match("/$pattern/i", $key);
+            }, ARRAY_FILTER_USE_KEY);
+        }
+
+        ksort($stats);
+
+        return $stats;
     }
 }
