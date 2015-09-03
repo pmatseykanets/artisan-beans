@@ -70,10 +70,10 @@ abstract class BaseCommand extends Command
      *
      * @param $tube
      *
-     * @return bool|object|\Pheanstalk\Job|void
-     *
      * @throws ServerException
      * @throws \Exception
+     *
+     * @return bool|object|\Pheanstalk\Job|void
      */
     protected function reserveJob($tube)
     {
@@ -93,10 +93,10 @@ abstract class BaseCommand extends Command
      *
      * @param $job
      *
-     * @return array
-     *
      * @throws ServerException
      * @throws \Exception
+     *
+     * @return array
      */
     protected function getJobStats($job)
     {
