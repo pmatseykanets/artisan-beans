@@ -45,11 +45,11 @@ class MoveCommand extends BaseCommand
         }
 
         $moved = 0;
-        while ($job = $this->reserveJob($this->argument('from'))) {
+        while ($job = $this->getNextJob($this->argument('from'), $this->state)) {
             if ($this->count > 0 && $moved >= $this->count) {
                 break;
             }
-
+            // Read the job's stats in order to preserve priority and ttr
             $stats = $this->getJobStats($job);
 
             $this->putJob($this->argument('to'), $job->getData(), $this->priority ?: $stats['pri'], $this->delay, $this->ttr ?: $stats['ttr']);
@@ -95,5 +95,23 @@ class MoveCommand extends BaseCommand
                 throw new \InvalidArgumentException('Priority should be a positive integer or 0.');
             }
         }
+    }
+
+    /**
+     * Fetches the next job from the tube.
+     * For ready jobs do reserve, for delayed and buried - peek.
+     *
+     * @param $tube
+     * @param $state
+     *
+     * @return bool|object|\Pheanstalk\Job|void
+     */
+    private function getNextJob($tube, $state)
+    {
+        if ('ready' == $this->state) {
+            return $this->reserveJob($tube);
+        }
+
+        return $this->peekJob($tube, $state);
     }
 }
