@@ -2,6 +2,7 @@
 
 ## [Unreleased][unreleased]
 ### Added
+- Add .gitattributes file.
 - Add this CHANGELOG file.
 
 
