@@ -31,6 +31,8 @@ class ArtisanBeansServiceProvider extends ServiceProvider
             'TubeStats',
             'UnpauseTube',
             'Move',
+            'Export',
+            'Import'
         ];
 
         foreach ($commands as $command) {
