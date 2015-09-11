@@ -1,10 +1,13 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [0.1.4] - 2015-09-11
 ### Added
+- Add `import` command. It's still experimental.
+- Add `export` command. It's still experimental. **Warning**: while exporting it deletes jobs from the queue.
 - Add .gitattributes file.
 - Add this CHANGELOG file.
-
 
 ## [0.1.3] - 2015-09-04
 ### Fixed
