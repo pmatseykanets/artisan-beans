@@ -32,7 +32,7 @@ class ArtisanBeansServiceProvider extends ServiceProvider
             'UnpauseTube',
             'Move',
             'Export',
-            'Import'
+            'Import',
         ];
 
         foreach ($commands as $command) {

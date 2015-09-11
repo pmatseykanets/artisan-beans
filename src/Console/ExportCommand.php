@@ -83,13 +83,13 @@ class ExportCommand extends BaseCommand
 
         $jobData = [
             'stats' => $stats,
-            'data' => $job->getData(),
+            'data'  => $job->getData(),
         ];
 
         return json_encode((object) [
             'meta' => [
                 'version' => '1.0',
-                'hash' => md5(json_encode((object) $jobData)),
+                'hash'    => md5(json_encode((object) $jobData)),
             ],
             'job' => $jobData,
         ], JSON_PRETTY_PRINT);
