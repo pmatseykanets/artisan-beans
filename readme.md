@@ -31,6 +31,8 @@ $ php artisan
  beans
   beans:bury          Bury a job
   beans:delete        Delete a job
+  beans:export        Export jobs
+  beans:import        Import jobs
   beans:kick          Kick a job
   beans:move          Move jobs between tubes
   beans:pause         Pause the tube
@@ -45,8 +47,6 @@ $ php artisan
 ## Roadmap
 
 * Add usage examples to this readme
-* Add `export` command to export jobs
-* Add `import` command to import jobs previously exported via `export`
 
 ## License
 
