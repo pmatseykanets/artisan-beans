@@ -3,10 +3,10 @@
 [![Laravel 5.x](https://img.shields.io/badge/Laravel-5.x-orange.svg)](http://laravel.com)
 [![StyleCI](https://styleci.io/repos/41767069/shield)](https://styleci.io/repos/41767069)
 [![Latest Stable Version](https://poser.pugx.org/pmatseykanets/artisan-beans/v/stable)](https://packagist.org/packages/pmatseykanets/artisan-beans)
-[![License](https://poser.pugx.org/pmatseykanets/artisan-beans/license)](https://packagist.org/packages/pmatseykanets/artisan-beans)
 [![Total Downloads](https://img.shields.io/packagist/dt/pmatseykanets/artisan-beans.svg?style=flat-square)](https://packagist.org/packages/pmatseykanets/artisan-beans)
+[![License](https://poser.pugx.org/pmatseykanets/artisan-beans/license)](https://packagist.org/packages/pmatseykanets/artisan-beans)
 
-This package contains a set of artisan commands that allows you manage your [Beanstalkd](https://kr.github.io/beanstalkd/) job queue server instance(s).
+This package brings a set of artisan commands that allows you manage your [Beanstalkd](https://kr.github.io/beanstalkd/) job queue server instance(s).
 
 ## Contents
 
