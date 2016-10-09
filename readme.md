@@ -1,28 +1,42 @@
 # artisan-beans
 
-[![Laravel 5.1](https://img.shields.io/badge/Laravel-5.1-orange.svg)](http://laravel.com)
+[![Laravel 5.x](https://img.shields.io/badge/Laravel-5.x-orange.svg)](http://laravel.com)
 [![StyleCI](https://styleci.io/repos/41767069/shield)](https://styleci.io/repos/41767069)
 [![Latest Stable Version](https://poser.pugx.org/pmatseykanets/artisan-beans/v/stable)](https://packagist.org/packages/pmatseykanets/artisan-beans)
 [![License](https://poser.pugx.org/pmatseykanets/artisan-beans/license)](https://packagist.org/packages/pmatseykanets/artisan-beans)
+[![Total Downloads](https://img.shields.io/packagist/dt/pmatseykanets/artisan-beans.svg?style=flat-square)](https://packagist.org/packages/pmatseykanets/artisan-beans)
 
 This package contains a set of artisan commands that allows you manage your [Beanstalkd](https://kr.github.io/beanstalkd/) job queue server instance(s).
 
+## Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Security](#security)
+- [Changelog](#changelog)
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [License](#license)
+
 ## Installation
 
-### 1. Install through composer
+You can install the package via composer:
 
 ```bash
 $ composer require pmatseykanets/artisan-beans
 ```
 
-### 2. Add a ServiceProvider
-
-Open `app/config/app.php`, and add a new item to the providers array.
+You must install the service provider:
 
 ```php
-Pvm\ArtisanBeans\ArtisanBeansServiceProvider::class
+// config/app.php
+'providers' => [
+    ...
+    Pvm\ArtisanBeans\ArtisanBeansServiceProvider::class,
+],
 ```
-### 3. Run artisan
+
+## Usage
 
 You're good to go. Run `php artisan` and you'll see new commands under the `beans` namespace.
 
@@ -44,11 +58,23 @@ $ php artisan
   beans:unpause       Upause the tube
 ```
 
-## Roadmap
+## Security
 
-* Add usage examples to this readme
+If you discover any security related issues, please email pmatseykanets@gmail.com instead of using the issue tracker.
+
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Credits
+
+- [Peter Matseykanets](https://github.com/pmatseykanets)
+- [All Contributors](../../contributors)
 
 ## License
 
-The artisan-beans is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
-
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
