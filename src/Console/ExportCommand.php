@@ -69,7 +69,7 @@ class ExportCommand extends BaseCommand
 
         if (!file_put_contents($filename, $contents)) {
             throw new \RuntimeException('Error saving the file.');
-        };
+        }
     }
 
     private function buildJobFileName($job, $stats)

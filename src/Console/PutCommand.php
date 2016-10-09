@@ -28,9 +28,7 @@ class PutCommand extends BaseCommand
 
     protected $body;
 
-    /**
-     *
-     */
+
     public function handle()
     {
         $this->parseArguments();
@@ -73,7 +71,7 @@ class PutCommand extends BaseCommand
 
             if (false === $this->body = file_get_contents($file)) {
                 throw new \RuntimeException("Error while trying to read '$file' file.");
-            };
+            }
         }
 
         if (!is_null($this->argument('body'))) {
