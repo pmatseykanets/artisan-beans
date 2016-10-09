@@ -1,4 +1,7 @@
 preset: recommended
 
+linting: true
+
 disabled:
-  - psr0
+  - align_double_arrow
+  - phpdoc_align
