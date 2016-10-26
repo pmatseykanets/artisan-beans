@@ -28,7 +28,6 @@ class PutCommand extends BaseCommand
 
     protected $body;
 
-
     public function handle()
     {
         $this->parseArguments();
