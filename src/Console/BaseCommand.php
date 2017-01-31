@@ -346,7 +346,16 @@ abstract class BaseCommand extends Command
         $this->output->writeln('<comment>body:</comment>');
 
         $data = $job->getData();
-        $this->output->writeln("\"$data\"");
+
+        $output = "\"$data\"";
+        if (substr($data, 0, 7) == '{"job":') {
+            $json = json_decode($data, true);
+            if ($json && isset($json['data']['command'])) {
+                $php = unserialize($json['data']['command']);
+                $output = print_r($php, true);
+            }
+        }
+        $this->output->writeln($output);
     }
 
     /**
