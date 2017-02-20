@@ -55,7 +55,7 @@ $ php artisan
   beans:put           Put a job into the tube
   beans:server        Show server statistics
   beans:tube          Show tube statistics
-  beans:unpause       Upause the tube
+  beans:unpause       Unpause the tube
 ```
 
 ## Security
