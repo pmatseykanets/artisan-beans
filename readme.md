@@ -6,7 +6,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/pmatseykanets/artisan-beans.svg?style=flat-square)](https://packagist.org/packages/pmatseykanets/artisan-beans)
 [![License](https://poser.pugx.org/pmatseykanets/artisan-beans/license)](https://packagist.org/packages/pmatseykanets/artisan-beans)
 
-This package brings a set of artisan commands that allows you manage your [Beanstalkd](https://kr.github.io/beanstalkd/) job queue server instance(s).
+This package brings a set of artisan commands that allows you manage your [Beanstalkd](https://kr.github.io/beanstalkd/) job queues.
 
 ## Contents
 
@@ -26,7 +26,7 @@ You can install the package via composer:
 $ composer require pmatseykanets/artisan-beans
 ```
 
-You must install the service provider:
+If you're using Laravel < 5.5 or if you have package auto-discovery turned off you have to manually register the service provider:
 
 ```php
 // config/app.php
