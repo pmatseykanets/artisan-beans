@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/pmatseykanets/artisan-beans/tree/HEAD)
 
+## [1.0.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v1.0.0) - 2017-09-02
+## Added 
+- Added Laravel 5.5 support including package auto discovery.
+
 ## [0.2.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v0.2.0) - 2017-01-30
 ## Added 
 - Added CONTRIBUTING.md.
