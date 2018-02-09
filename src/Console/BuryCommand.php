@@ -44,7 +44,7 @@ class BuryCommand extends BaseCommand
 
             $this->buryJob($job, $this->priority);
 
-            ++$buried;
+            $buried++;
         }
 
         if (0 == $buried) {

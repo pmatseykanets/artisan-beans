@@ -47,7 +47,7 @@ class ImportCommand extends BaseCommand
         foreach ($files as $filename) {
             try {
                 $this->importJob($filename, $this->argument('tube'), $this->option('delay'), $this->option('ttr'), $this->option('priority'));
-                ++$imported;
+                $imported++;
             } catch (\RuntimeException $e) {
                 $this->reportImported($imported);
 

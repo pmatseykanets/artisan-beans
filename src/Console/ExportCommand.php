@@ -40,7 +40,7 @@ class ExportCommand extends BaseCommand
 
             $this->deleteJob($job);
 
-            ++$exported;
+            $exported++;
         }
 
         if (0 == $exported) {

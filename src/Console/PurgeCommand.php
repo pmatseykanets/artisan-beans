@@ -34,7 +34,7 @@ class PurgeCommand extends DeleteCommand
 
             $this->deleteJob($job);
 
-            ++$deleted;
+            $deleted++;
         }
 
         if (0 == $deleted) {

@@ -56,7 +56,7 @@ class MoveCommand extends BaseCommand
 
             $this->deleteJob($job);
 
-            ++$moved;
+            $moved++;
         }
 
         if (0 == $moved) {
