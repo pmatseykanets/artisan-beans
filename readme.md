@@ -22,8 +22,16 @@ This package brings a set of artisan commands that allows you manage your [Beans
 
 You can install the package via composer:
 
+**Laravel 5.6**
+
 ```bash
 $ composer require pmatseykanets/artisan-beans
+```
+
+**Laravel <= 5.5**
+
+```bash
+$ composer require pmatseykanets/artisan-beans:1.0.0
 ```
 
 If you're using Laravel < 5.5 or if you have package auto-discovery turned off you have to manually register the service provider:
