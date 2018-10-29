@@ -1,7 +1,1 @@
-preset: recommended
-
-linting: true
-
-disabled:
-  - align_double_arrow
-  - phpdoc_align
+preset: laravel
