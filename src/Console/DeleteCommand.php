@@ -19,13 +19,13 @@ class DeleteCommand extends PeekCommand
 
         $tube = $this->argument('tube') ?: $this->defaultTube;
 
-        if (!$job = $this->peekJob($tube, $this->state)) {
+        if (! $job = $this->peekJob($tube, $this->state)) {
             return $this->renderJobNotFoundMessage($tube, $this->state);
         }
 
         $this->renderJob($job);
 
-        if (!$this->confirm('Are you sure you want to delete this job?')) {
+        if (! $this->confirm('Are you sure you want to delete this job?')) {
             return;
         }
 

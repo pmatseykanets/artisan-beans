@@ -67,7 +67,7 @@ class ExportCommand extends BaseCommand
             throw new \RuntimeException('File already exists.');
         }
 
-        if (!file_put_contents($filename, $contents)) {
+        if (! file_put_contents($filename, $contents)) {
             throw new \RuntimeException('Error saving the file.');
         }
     }
@@ -101,12 +101,12 @@ class ExportCommand extends BaseCommand
     protected function parseCommandArguments()
     {
         $this->path = $this->argument('path');
-        if (!is_dir($this->path) || !is_writable($this->path)) {
+        if (! is_dir($this->path) || ! is_writable($this->path)) {
             throw new \InvalidArgumentException("Path '$this->path' doesn't exist or is not writable.");
         }
 
         $this->state = strtolower($this->argument('state'));
-        if (!in_array($this->state, ['ready', 'buried', 'delayed'])) {
+        if (! in_array($this->state, ['ready', 'buried', 'delayed'])) {
             throw new \InvalidArgumentException("Invalid state '$this->state'.");
         }
 

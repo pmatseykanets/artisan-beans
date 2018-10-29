@@ -25,7 +25,7 @@ class KickCommand extends BaseCommand
         $tube = $this->argument('tube') ?: $this->defaultTube;
 
         if ($this->count > 1) {
-            if (!$this->confirmToProceed("You are about to kick $this->count jobs in '$tube' tube.")) {
+            if (! $this->confirmToProceed("You are about to kick $this->count jobs in '$tube' tube.")) {
                 return;
             }
         }

@@ -31,7 +31,7 @@ class BuryCommand extends BaseCommand
         $tube = $this->argument('tube') ?: $this->defaultTube;
 
         if ($this->count > 1) {
-            if (!$this->confirmToProceed("You are about to bury $this->count jobs in '$tube' tube.")) {
+            if (! $this->confirmToProceed("You are about to bury $this->count jobs in '$tube' tube.")) {
                 return;
             }
         }
@@ -65,7 +65,7 @@ class BuryCommand extends BaseCommand
             }
         }
 
-        if (!is_null($this->option('priority'))) {
+        if (! is_null($this->option('priority'))) {
             if (false === ($this->priority = filter_var($this->option('priority'), FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]))) {
                 throw new \InvalidArgumentException('Priority should be a positive integer or 0.');
             }

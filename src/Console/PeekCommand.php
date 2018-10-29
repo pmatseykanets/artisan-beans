@@ -26,7 +26,7 @@ class PeekCommand extends BaseCommand
 
         $tube = $this->argument('tube') ?: $this->defaultTube;
 
-        if (!$job = $this->peekJob($tube, $this->state)) {
+        if (! $job = $this->peekJob($tube, $this->state)) {
             return $this->renderJobNotFoundMessage($tube, $this->state);
         }
 
@@ -39,7 +39,7 @@ class PeekCommand extends BaseCommand
     protected function parseCommandArguments()
     {
         $this->state = strtolower($this->argument('state'));
-        if (!in_array($this->state, ['ready', 'buried', 'delayed'])) {
+        if (! in_array($this->state, ['ready', 'buried', 'delayed'])) {
             throw new \InvalidArgumentException("Invalid state '$this->state'.");
         }
     }

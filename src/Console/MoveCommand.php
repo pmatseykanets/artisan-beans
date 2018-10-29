@@ -39,7 +39,7 @@ class MoveCommand extends BaseCommand
         $this->parseArguments();
 
         if ($this->count > 1) {
-            if (!$this->confirmToProceed("You are about to move $this->count jobs from '".$this->argument('from')."' to '".$this->argument('to')."'.")) {
+            if (! $this->confirmToProceed("You are about to move $this->count jobs from '".$this->argument('from')."' to '".$this->argument('to')."'.")) {
                 return;
             }
         }
@@ -72,7 +72,7 @@ class MoveCommand extends BaseCommand
     protected function parseCommandArguments()
     {
         $this->state = strtolower($this->argument('state'));
-        if (!in_array($this->state, ['ready', 'buried', 'delayed'])) {
+        if (! in_array($this->state, ['ready', 'buried', 'delayed'])) {
             throw new \InvalidArgumentException("Invalid state '$this->state'.");
         }
 
@@ -84,13 +84,13 @@ class MoveCommand extends BaseCommand
             throw new \InvalidArgumentException('Delay should be a positive integer or 0.');
         }
 
-        if (!is_null($this->option('ttr'))) {
+        if (! is_null($this->option('ttr'))) {
             if (false === ($this->ttr = filter_var($this->option('ttr'), FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]))) {
                 throw new \InvalidArgumentException('TTR should be a positive integer.');
             }
         }
 
-        if (!is_null($this->option('priority'))) {
+        if (! is_null($this->option('priority'))) {
             if (false === ($this->priority = filter_var($this->option('priority'), FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]))) {
                 throw new \InvalidArgumentException('Priority should be a positive integer or 0.');
             }

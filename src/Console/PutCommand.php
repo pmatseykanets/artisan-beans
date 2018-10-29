@@ -44,11 +44,11 @@ class PutCommand extends BaseCommand
      */
     protected function parseCommandArguments()
     {
-        if (is_null($this->argument('body')) && !$this->option('file')) {
+        if (is_null($this->argument('body')) && ! $this->option('file')) {
             throw new \InvalidArgumentException('You must explicitly specify the body of the job.');
         }
 
-        if (!is_null($this->argument('body')) && $this->option('file')) {
+        if (! is_null($this->argument('body')) && $this->option('file')) {
             throw new \InvalidArgumentException('Body argument and file option are mutually exclusive.');
         }
 
@@ -73,7 +73,7 @@ class PutCommand extends BaseCommand
             }
         }
 
-        if (!is_null($this->argument('body'))) {
+        if (! is_null($this->argument('body'))) {
             $this->validateBodySize(strlen($this->argument('body')));
             $this->body = $this->argument('body');
         }

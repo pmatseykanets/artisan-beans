@@ -39,7 +39,7 @@ class ImportCommand extends BaseCommand
         $files = $this->getJobFiles($this->path);
 
         if (($totalFiles = count($files)) > 1) {
-            if (!$this->confirmToProceed("You are about to import $totalFiles jobs.")) {
+            if (! $this->confirmToProceed("You are about to import $totalFiles jobs.")) {
                 return;
             }
         }
@@ -99,10 +99,10 @@ class ImportCommand extends BaseCommand
         $data = json_decode(file_get_contents($filename));
 
         if ((is_null($data) && JSON_ERROR_NONE !== json_last_error()) ||
-            !isset($data->meta->version) ||
-            !isset($data->meta->hash) ||
-            !isset($data->job->data) ||
-            !isset($data->job->stats) ||
+            ! isset($data->meta->version) ||
+            ! isset($data->meta->hash) ||
+            ! isset($data->job->data) ||
+            ! isset($data->job->stats) ||
             '1.0' !== $data->meta->version) {
             throw new \RuntimeException("File '$filename' is not a valid job file or has an unsupported format.");
         }

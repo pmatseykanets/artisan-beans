@@ -2,10 +2,10 @@
 
 namespace Pvm\ArtisanBeans\Console;
 
+use Pheanstalk\Response;
+use Pheanstalk\Pheanstalk;
 use Illuminate\Console\Command;
 use Pheanstalk\Exception\ServerException;
-use Pheanstalk\Pheanstalk;
-use Pheanstalk\Response;
 
 abstract class BaseCommand extends Command
 {
@@ -177,7 +177,7 @@ abstract class BaseCommand extends Command
      */
     public function getPheanstalk()
     {
-        if (!$this->pheanstalk) {
+        if (! $this->pheanstalk) {
             $this->pheanstalk = new Pheanstalk($this->host, $this->port);
         }
 
@@ -221,13 +221,13 @@ abstract class BaseCommand extends Command
 
         // If user provided the connection name read it directly
         if ($connectionName) {
-            if (!$connection = config("queue.connections.$connectionName")) {
+            if (! $connection = config("queue.connections.$connectionName")) {
                 throw new \InvalidArgumentException("Connection '$connectionName' doesn't exist.");
             }
         }
 
         // Try default connection
-        if (!$connection) {
+        if (! $connection) {
             $defaultConnection = config('queue.default');
 
             if ('beanstalkd' == config("queue.connections.$defaultConnection.driver")) {
@@ -236,7 +236,7 @@ abstract class BaseCommand extends Command
         }
 
         // Try first connection that has beanstalkd driver
-        if (!$connection) {
+        if (! $connection) {
             foreach (config('queue.connections') as $connection) {
                 if ('beanstalkd' == $connection['driver']) {
                     break;
@@ -244,7 +244,7 @@ abstract class BaseCommand extends Command
             }
         }
 
-        if (!empty($connection['host'])) {
+        if (! empty($connection['host'])) {
             $parsedConfigHost = explode(':', $connection['host']);
 
             $this->host = $parsedConfigHost[0];
@@ -254,7 +254,7 @@ abstract class BaseCommand extends Command
             }
         }
 
-        if (!empty($connection['queue'])) {
+        if (! empty($connection['queue'])) {
             $this->defaultTube = $connection['queue'];
         }
     }
@@ -301,11 +301,11 @@ abstract class BaseCommand extends Command
      */
     protected function validateFile($filePath, $message = 'File', $allowEmpty = true)
     {
-        if (!file_exists($filePath) || !is_readable($filePath)) {
+        if (! file_exists($filePath) || ! is_readable($filePath)) {
             throw new \RuntimeException("$message '{$filePath}' doesn't exist or is not readable.");
         }
 
-        if (!$allowEmpty && 0 === filesize($filePath)) {
+        if (! $allowEmpty && 0 === filesize($filePath)) {
             throw new \RuntimeException("$message '{$filePath}' is empty.");
         }
 
@@ -435,7 +435,7 @@ abstract class BaseCommand extends Command
     {
         $stats = (array) $this->getPheanstalk()->stats();
 
-        if (!empty($pattern)) {
+        if (! empty($pattern)) {
             $stats = array_filter($stats, function ($key) use ($pattern) {
                 return 1 === preg_match("/$pattern/i", $key);
             }, ARRAY_FILTER_USE_KEY);
