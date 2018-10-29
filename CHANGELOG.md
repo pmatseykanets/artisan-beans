@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v2.1.0) - 2018-10-29
+
+### Changed
+
+- Changed constraints for laravel packages to allow future versions
+
 ## [2.0.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v2.0.0) - 2018-02-09
 
 ### Changed
@@ -8,7 +14,7 @@
 
 ## [1.0.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v1.0.0) - 2017-09-02
 
-### Added 
+### Added
 
 - Added Laravel 5.5 support including package auto discovery.
 
