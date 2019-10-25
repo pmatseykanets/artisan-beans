@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v3.0.0) - 2019-10-25
+
+### Changed
+
+- Added Laravel 6 support
+
 ## [2.1.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v2.1.0) - 2018-10-29
 
 ### Changed
