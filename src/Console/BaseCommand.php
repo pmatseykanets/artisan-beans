@@ -165,7 +165,8 @@ abstract class BaseCommand extends Command
     protected function putJob($tube, $body, $priority, $delay, $ttr)
     {
         $id = $this->getPheanstalk()
-            ->putInTube($tube, $body, $priority, $delay, $ttr);
+            ->useTube($tube)
+            ->put($body, $priority, $delay, $ttr);
 
         return $id;
     }
@@ -178,7 +179,7 @@ abstract class BaseCommand extends Command
     public function getPheanstalk()
     {
         if (! $this->pheanstalk) {
-            $this->pheanstalk = new Pheanstalk($this->host, $this->port);
+            $this->pheanstalk = Pheanstalk::create($this->host, $this->port);
         }
 
         return $this->pheanstalk;
