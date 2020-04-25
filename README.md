@@ -1,6 +1,5 @@
 # artisan-beans
 
-[![Laravel 5.x](https://img.shields.io/badge/Laravel-5.x-orange.svg)](http://laravel.com)
 [![StyleCI](https://styleci.io/repos/41767069/shield)](https://styleci.io/repos/41767069)
 [![Latest Stable Version](https://poser.pugx.org/pmatseykanets/artisan-beans/v/stable)](https://packagist.org/packages/pmatseykanets/artisan-beans)
 [![Total Downloads](https://img.shields.io/packagist/dt/pmatseykanets/artisan-beans.svg?style=flat-square)](https://packagist.org/packages/pmatseykanets/artisan-beans)
@@ -22,10 +21,16 @@ This package brings a set of artisan commands that allows you manage your [Beans
 
 You can install the package via composer:
 
-### Laravel 5.6+, Laravel 6
+### Laravel 6,7 (Pheanstalk 4)
 
 ```bash
 composer require pmatseykanets/artisan-beans
+```
+
+### Laravel 5.6+, Laravel 6
+
+```bash
+composer require pmatseykanets/artisan-beans:3.0.0
 ```
 
 ### Laravel <= 5.5

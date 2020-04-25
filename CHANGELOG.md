@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.0.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v4.0.0) - 2020-04-25
+
+### Changed
+
+- Added Laravel 7 + Pheanstalk 4 support
+
 ## [3.0.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v3.0.0) - 2019-10-25
 
 ### Changed
