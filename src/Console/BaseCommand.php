@@ -2,10 +2,10 @@
 
 namespace Pvm\ArtisanBeans\Console;
 
-use Pheanstalk\Response;
-use Pheanstalk\Pheanstalk;
 use Illuminate\Console\Command;
 use Pheanstalk\Exception\ServerException;
+use Pheanstalk\Pheanstalk;
+use Pheanstalk\Response;
 
 abstract class BaseCommand extends Command
 {
