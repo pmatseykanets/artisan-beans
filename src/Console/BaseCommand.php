@@ -2,10 +2,10 @@
 
 namespace Pvm\ArtisanBeans\Console;
 
-use Pheanstalk\Response;
-use Pheanstalk\Pheanstalk;
 use Illuminate\Console\Command;
 use Pheanstalk\Exception\ServerException;
+use Pheanstalk\Pheanstalk;
+use Pheanstalk\Response;
 
 abstract class BaseCommand extends Command
 {
@@ -55,7 +55,7 @@ abstract class BaseCommand extends Command
         $peekMethod = 'peek'.ucfirst($state);
 
         try {
-            return $this->getPheanstalk()->$peekMethod($tube);
+            return $this->getPheanstalk()->useTube($tube)->$peekMethod($tube);
         } catch (ServerException $e) {
             if ($this->isNotFoundException($e)) {
                 return;
@@ -78,7 +78,7 @@ abstract class BaseCommand extends Command
     protected function reserveJob($tube)
     {
         try {
-            return $this->getPheanstalk()->reserveFromTube($tube, 0);
+            return $this->getPheanstalk()->useTube($tube)->reserveWithTimeout(0);
         } catch (ServerException $e) {
             if ($this->isNotFoundException($e)) {
                 return;
@@ -164,10 +164,9 @@ abstract class BaseCommand extends Command
      */
     protected function putJob($tube, $body, $priority, $delay, $ttr)
     {
-        $id = $this->getPheanstalk()
-            ->putInTube($tube, $body, $priority, $delay, $ttr);
-
-        return $id;
+        return $this->getPheanstalk()
+            ->useTube($tube)
+            ->put($body, $priority, $delay, $ttr);
     }
 
     /**
@@ -178,7 +177,7 @@ abstract class BaseCommand extends Command
     public function getPheanstalk()
     {
         if (! $this->pheanstalk) {
-            $this->pheanstalk = new Pheanstalk($this->host, $this->port);
+            $this->pheanstalk = Pheanstalk::create($this->host, $this->port);
         }
 
         return $this->pheanstalk;

@@ -34,9 +34,9 @@ class PutCommand extends BaseCommand
 
         $tube = $this->argument('tube') ?: $this->defaultTube;
 
-        $id = $this->putJob($tube, $this->body, $this->priority, $this->delay, $this->ttr);
+        $job = $this->putJob($tube, $this->body, $this->priority, $this->delay, $this->ttr);
 
-        $this->info("Added job with id $id to '$tube' with priority $this->priority, delay $this->delay, TTR $this->ttr");
+        $this->info("Added job with id {$job->getId()} to '$tube' with priority $this->priority, delay $this->delay, TTR $this->ttr");
     }
 
     /**
