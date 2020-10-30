@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v4.1.0) - 2020-10-30
+
+### Changed
+
+- Added Laravel 8 support
+
 ## [4.0.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v4.0.0) - 2020-04-25
 
 ### Changed
