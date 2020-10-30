@@ -21,7 +21,7 @@ This package brings a set of artisan commands that allows you manage your [Beans
 
 You can install the package via composer:
 
-### Laravel 6,7 (Pheanstalk 4)
+### Laravel 6,7,8 (Pheanstalk 4)
 
 ```bash
 composer require pmatseykanets/artisan-beans
