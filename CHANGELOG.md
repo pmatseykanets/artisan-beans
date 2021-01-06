@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v4.2.0) - 2021-01-06
+
+### Changed
+
+- Added PHP 8 support
+
 ## [4.1.0](https://github.com/pmatseykanets/artisan-beans/releases/tag/v4.1.0) - 2020-10-30
 
 ### Changed
