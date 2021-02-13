@@ -7,6 +7,10 @@
 
 This package brings a set of artisan commands that allows you manage your [Beanstalkd](https://kr.github.io/beanstalkd/) job queues.
 
+If you find this package usefull, please consider bying me a coffee.
+
+<a href='https://ko-fi.com/V7V43MXAO' target='_blank'><img height='28' style='border:0px;height:28px;' src='https://cdn.ko-fi.com/cdn/kofi2.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
 ## Contents
 
 - [Installation](#installation)
